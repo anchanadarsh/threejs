@@ -1,6 +1,7 @@
 let scene;
 let camera;
 let renderer;
+let mesh;
 
 init();
 animate();
@@ -20,16 +21,16 @@ function init() {
   const container = document.getElementById('container');
   container.appendChild(renderer.domElement);
 
-  const geometry = new THREE.SphereGeometry(400, 60, 40);
+  const geometry = new THREE.SphereGeometry(400, 60, 60);
   const texture = new THREE.TextureLoader().load('../common/pano.jpg');
   const material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide });
-  const mesh = new THREE.Mesh(geometry, material);
+  mesh = new THREE.Mesh(geometry, material);
 
   // WebVR
   if (WEBVR.checkAvailability()) {
     WEBVR.getVRDisplay(function(display) {
       renderer.vr.setDevice(display);
-      document.body.appendChild(WEBVR.getButton(display, renderer.domElement));
+      // document.body.appendChild(WEBVR.getButton(display, renderer.domElement));
     });
   }
 
@@ -41,6 +42,7 @@ function init() {
 function animate() {
   requestAnimationFrame( animate );
   renderer.render( scene, camera );
+  // mesh.rotation.y += 0.005;
 }
 
 function onWindowResize() {
