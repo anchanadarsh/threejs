@@ -61,7 +61,7 @@ function init() {
 
 function animate() {
   requestAnimationFrame( animate );
-  renderer.render( scene, camera );
+renderer.render( scene, camera );
 
   if( videoElement.readyState === videoElement.HAVE_ENOUGH_DATA ){
     texture.needsUpdate = true;
